@@ -1,0 +1,38 @@
+{
+  "name": "raised-bed-calculator",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "webpack serve --open --mode=development",
+    "build": "webpack --mode=development",
+    "build-prod": "webpack --mode=production"
+  },
+  "author": "Tobin Chew",
+  "devDependencies": {
+    "@types/react": "^17.0.4",
+    "@types/react-dom": "^17.0.3",
+    "@types/react-frame-component": "^4.1.1",
+    "@types/three": "^0.127.1",
+    "copy-webpack-plugin": "^8.1.1",
+    "css-loader": "^5.2.4",
+    "html-webpack-plugin": "^5.3.1",
+    "react-frame-component": "^5.0.0",
+    "sass": "^1.32.11",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "three": "^0.128.0",
+    "ts-loader": "^9.1.1",
+    "typescript": "^4.2.4",
+    "webpack": "^5.36.0",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "@types/jquery": "^3.5.5",
+    "@types/styled-components": "^5.1.9",
+    "jquery": "^3.6.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "styled-components": "^5.2.3",
+    "web-components-with-react": "^1.2.1"
+  }
+}
