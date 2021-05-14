@@ -1,55 +1,52 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components";
-import { makeValue, Name } from "./Contants";
+import { Name } from "./Contants";
+import { makeValue } from "./utils";
 const Div = styled.div`
   position: absolute;
-  border: 2px dashed lightgrey;
+
   box-sizing: border-box;
-  background: lightcyan;
+  /* background: lightcyan; */
   cursor: pointer;
   pointer-events: initial;
   &:hover {
-    background: darkgrey;
+    background: rgba(0, 0, 0, 0.4);
+    /* border: 2px dashed lightgrey; */
   }
 `;
 
 type Props = {
-  left?: number;
-  right?: number;
-  top?: number;
-  bottom?: number;
   height?: number;
   width?: number;
   beam1: Name;
   beam2: Name;
-  current: Name;
+  //   current: Name;
   setOverlap: any;
+  overlap: any;
 };
 
 const Overlap: FC<Props> = ({
-  bottom,
-  left,
-  right,
-  top,
   width,
   height,
   beam1,
   beam2,
-  current,
+  //   current,
   setOverlap,
+  overlap,
 }: Props) => {
+  const current = overlap[`${beam1}${beam2}`];
+
   return (
     <Div
       style={{
-        top: makeValue(top),
-        left: makeValue(left),
-        right: makeValue(right),
-        bottom: makeValue(bottom),
+        [beam1.toLowerCase()]: 0,
+        [beam2.toLowerCase()]: 0,
+
         width: makeValue(width),
         height: makeValue(height),
       }}
       onClick={() => {
-        setOverlap(current === beam1 ? beam2 : beam1);
+        setOverlap(beam1, beam2, current === beam1 ? beam2 : beam1);
       }}
     ></Div>
   );

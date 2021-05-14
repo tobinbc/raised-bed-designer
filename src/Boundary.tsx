@@ -6,10 +6,11 @@ const ViewDiv = styled.div`
   height: 90%;
   top: 10%;
   left: 10%;
+  box-sizing: border-box;
   position: relative;
   overflow: hidden;
   pointer-events: none;
-  border: 1px solid red;
+  border: 2px dashed grey;
 `;
 const LayoutDiv = styled.div<{ height; width }>`
   width: ${(p) => p.width}%;
@@ -24,11 +25,11 @@ const LayoutDiv = styled.div<{ height; width }>`
 `;
 type Props = {
   children: ReactNode;
-  zoom: number;
   outerWidth: number;
   outerHeight: number;
+  setAspect: any;
 };
-const Boundary = ({ children, zoom, outerWidth, outerHeight }: Props) => {
+const Boundary = ({ children, outerWidth, outerHeight, setAspect }: Props) => {
   const ratio = outerWidth / outerHeight;
   if (ratio >= 1) {
     outerWidth = 100;
@@ -38,16 +39,22 @@ const Boundary = ({ children, zoom, outerWidth, outerHeight }: Props) => {
     outerWidth = outerHeight * ratio;
   }
   const ref = useRef(null);
-  //   const [height, setHeight] = useState(0);
-  //   const [width, setWidth] = useState(0);
-
-  //   useEffect(() => {
-  //     if (ref.current) {
-  //       setHeight(ref.current.offsetHeight);
-  //       setWidth(ref.current.offsetWidth);
-  //     }
-  //   }, [ref]);
-
+  //
+  function getAspect() {
+    if (ref.current) {
+      const height = ref.current.offsetHeight;
+      const width = ref.current.offsetWidth;
+      const aspect = height / width;
+      setAspect(aspect);
+    }
+  }
+  useEffect(getAspect, [ref]);
+  useEffect(() => {
+    window.addEventListener("resize", getAspect);
+    return () => {
+      window.removeEventListener("resize", getAspect);
+    };
+  }, []);
   //   console.log("Boundary", { height, width, outerHeight, outerWidth });
   //   const childrenWithDimensions = React.Children.map(children, (child) => {
   //     if (React.isValidElement(child)) {

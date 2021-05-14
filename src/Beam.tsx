@@ -1,25 +1,31 @@
 import React, { FC, useState } from "react";
 import styled from "styled-components";
 import { Name } from "./Contants";
-const Div = styled.div`
+import { displayName, makeValue } from "./utils";
+const Div = styled.div<{ used: boolean }>`
   position: absolute;
-  border: 2px solid black;
+  border: ${({ used }) => (used ? `2px solid black` : `1px dashed lightgrey`)};
   box-sizing: border-box;
-  background: lightcoral;
+  background: ${({ used }) => (used ? `#d1b076` : `transparent`)};
   pointer-events: initial;
+  cursor: pointer;
+  &:hover {
+    background: ${({ used }) => (used ? `#ad9263` : `lightgrey`)};
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
-const NameSpan = styled.span`
-  margin: 0 auto;
+const NameSpan = styled.span<{ used: boolean }>`
+  /* margin: 0 auto; */
+  font-size: 1.5rem;
+  color: ${({ used }) => (used ? `black` : `grey`)};
 `;
 
 type Props = {
-  //   parentHeight?: number;
-  //   parentWidth?: number;
-  //   longOuterDimension: number;
-  //   startOverlap: Name;
-  //   endOverlap: Name;
-  //   thickness: number;
+  used: any;
+  setUsed: any;
   name: Name;
   left?: number;
   right?: number;
@@ -30,12 +36,7 @@ type Props = {
 };
 
 const Beam: FC<Props> = ({
-  //   parentHeight,
-  //   endOverlap,
-  //   longOuterDimension,
-  //   parentWidth,
-  //   startOverlap,
-  //   thickness,
+  used,
   name,
   bottom,
   left,
@@ -43,24 +44,11 @@ const Beam: FC<Props> = ({
   top,
   width,
   height,
+  setUsed,
 }: Props) => {
-  //   const isSideways = [Name.Bottom, Name.Top].includes(name);
-
-  //   //   const height = heightPx / parentHeight + "%";
-  //   //   const width = widthPx / parentWidth + "%";
-
-  //   const longBeamDimension =
-  //     100 -
-  //     (startOverlap === name ? thickness : 0) -
-  //     (endOverlap === name ? thickness : 0);
-  //   const shortBeamDimension = thickness;
-
-  //   const heightPx = isSideways ? shortBeamDimension : longBeamDimension;
-  //   const widthPx = isSideways ? longBeamDimension : shortBeamDimension;
-  const makeValue = (input) =>
-    typeof input === "number" ? `${input}%` : undefined;
   return (
     <Div
+      used={used[name]}
       style={{
         top: makeValue(top),
         left: makeValue(left),
@@ -69,8 +57,12 @@ const Beam: FC<Props> = ({
         width: makeValue(width),
         height: makeValue(height),
       }}
+      onClick={() => setUsed(name, !used[name])}
     >
-      <NameSpan>{name}</NameSpan>
+      <NameSpan used={used[name]}>
+        {displayName(name)}
+        {/* | {name} */}
+      </NameSpan>
     </Div>
   );
 };

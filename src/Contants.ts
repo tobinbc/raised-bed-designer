@@ -1,9 +1,17 @@
 export enum Name {
-  Top = "A",
-  Right = "B",
-  Bottom = "C",
-  Left = "D",
+  Top = "Top",
+  Right = "Right",
+  Bottom = "Bottom",
+  Left = "Left",
 }
+export enum Viewpoint {
+  Front,
+}
+export enum Orientation {
+  Tall,
+  Flat,
+}
+export const maxBeamLength = 240;
 
-export const makeValue = (input) =>
-  typeof input === "number" ? `${input}%` : undefined;
+export const TagName = "raised-bed-design";
+export const DesignChanged = "designChanged";

@@ -15,13 +15,22 @@
         margin: 0%;
       }
       raised-bed-design {
-        height: 100vh;
+        height: 80vh;
         width: 100vw;
-        background-color: wheat;
+        /* background-color: wheat; */
         display: block;
       }
     </style>
-    <raised-bed-design></raised-bed-design>
+    <raised-bed-design
+      data-beam-colour=""
+      data-beam-x="10"
+      data-beam-y="20"
+    ></raised-bed-design>
+    <script>
+      const elem = document.getElementsByTagName("raised-bed-design")[0];
+
+      elem.addEventListener("designChanged", console.log);
+    </script>
     <!-- <script src="custom-elements/raised-bed-design.js"></script> -->
     <!-- <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
